@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.Extensions.Options
+@using Shlok.Framework.ui.frontend.primary.Options
+@using Volo.Abp.Users
+@using System.Net
+@inject ICurrentUser CurrentUser
+@inject IOptions<ShlokFrameworkUrlOptions> UrlOptions
+
+<footer class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <a href="@Url.Page("/index")" class="footer-logo">
+                    ShlokFramework
+                </a>
+            </div>
+
+            <div class="col-md">
+                @if (!CurrentUser.IsAuthenticated)
+                {
+                    <h5>Account</h5>
+                    <div class="footer-links">
+
+                        <a href="@UrlOptions.Value.Account/account/register?returnUrl=@UrlOptions.Value.Www@(WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery()))" class="d-block">Sign Up</a>
+                        <a href="/account/login?returnUrl=@(WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery()))" class="d-block">Log In</a>
+
+                    </div>
+                }
+            </div>
+            <div class="col-md">
+                <h5>Follow Us</h5>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/openeventhub">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/openeventhub">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/openeventhub/">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/openeventhub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-auto">
+                    <span class="copyright">© 2021 ShlokFramework</span>
+                </div>
+                <div class="col-md text-center text-md-end">
+                    <a href="@UrlOptions.Value.Www/terms-service">
+                        Terms of Service
+                    </a>
+                    <span>
+                        <img src="/assets/seperator2.svg" class="mx-3">
+                    </span>
+                    <a href="@UrlOptions.Value.Www/privacy-policy">
+                        Privacy Policy
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
